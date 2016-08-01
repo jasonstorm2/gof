@@ -448,6 +448,8 @@ public class GenDB {
 	public Connection getDBConnection(String driver, String urlDB, String user, String pwd) throws Exception {
 		// 连接MYSQL数据库
 		Class.forName(driver);
+		//如果数据库不存在，则创建一个
+		createDatabase();
 		Connection conn = DriverManager.getConnection(urlDB, user, pwd);
 		
 		return conn;
@@ -575,6 +577,26 @@ public class GenDB {
 		
 		//正常退出
 		System.exit(0);
+	}
+	
+	private void createDatabase() {
+		Connection connection = null;
+		Statement statement = null;
+		try {
+//			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			String url = "jdbc:mysql://localhost/mysql";
+			connection = DriverManager.getConnection(url, "root",
+					"root");
+
+			statement = connection.createStatement();
+			String hrappSQL = "CREATE DATABASE IF NOT EXISTS user_login DEFAULT CHARSET utf8 COLLATE utf8_general_ci";
+			statement.executeUpdate(hrappSQL);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
