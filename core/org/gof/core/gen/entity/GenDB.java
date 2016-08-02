@@ -590,6 +590,8 @@ public class GenDB {
 
 			statement = connection.createStatement();
 			String hrappSQL = "CREATE DATABASE IF NOT EXISTS user_login DEFAULT CHARSET utf8 COLLATE utf8_general_ci";
+//			String hrappSQL = "CREATE DATABASE IF NOT EXISTS user_login DEFAULT CHARSET gb2312 COLLATE gb2312_chinese_ci";
+
 			statement.executeUpdate(hrappSQL);
 
 		} catch (Exception e) {
